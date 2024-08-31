@@ -1,10 +1,9 @@
 // tailwind.config.js
-/** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ['class'],
     content: [
     './index.html',
-    './src/**/*.{js,ts,jsx,tsx}', // Add paths to all your components
+    './src/**/*.{js,ts,jsx,tsx}', // Update these paths based on your project structure
   ],
   theme: {
   	extend: {
