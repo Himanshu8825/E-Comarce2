@@ -24,8 +24,6 @@ const App = () => {
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      <h1>Header Components</h1>
-      
       <Routes>
         <Route
           path="/auth"

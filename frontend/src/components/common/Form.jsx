@@ -106,7 +106,7 @@ const Form = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 poppins-medium">
         {formControls.map((item, index) => (
           <div key={index} className="grid w-full gap-1.5">
             <Label htmlFor={item.name} className="mb-1">
@@ -116,7 +116,7 @@ const Form = ({
           </div>
         ))}
       </div>
-      <Button  type="submit" className="mt-4 w-full">
+      <Button  type="submit" className="mt-4 w-full bg-[#7D0DC3] hover:bg-[#5a058e]">
         {buttonText || 'Submit'}
       </Button>
     </form>

@@ -10,19 +10,19 @@ const Signup = () => {
     password: '',
   });
 
-  const submitHandler = async (event) => {
+  const signupHandler = async (event) => {
     event.preventDefault();
-    // Add form submission logic here, e.g., API call or validation
+
     console.log('Form submitted:', formData);
   };
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-4xl text-[#7D0DC3] font-bold tracking-tight text-foreground">
           Create new account
         </h1>
-        <p className="mt-2">
+        <p className="mt-2 bg-green">
           Already have an account?
           <Link
             className="font-medium text-primary hover:underline hover:text-blue-500 ml-2"
@@ -37,7 +37,7 @@ const Signup = () => {
         buttonText={'Signup'}
         formData={formData}
         setFormData={setFormData}
-        onSubmit={submitHandler}
+        onSubmit={signupHandler}
       />
     </div>
   );

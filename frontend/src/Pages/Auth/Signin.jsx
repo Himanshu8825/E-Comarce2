@@ -1,9 +1,45 @@
-import React from 'react'
+import Form from '@/components/common/Form';
+import { loginFormControls } from '@/config/Index';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Signin = () => {
-  return (
-    <div>Signin</div>
-  )
-}
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-export default Signin
+  const loginHandler = async (event) => {
+    event.preventDefault();
+
+    console.log('Form submitted:', formData);
+  };
+
+  return (
+    <div className="mx-auto w-full max-w-md space-y-6">
+      <div className="text-center">
+        <h1 className="text-4xl text-[#7D0DC3] font-bold tracking-tight text-foreground">
+          Signin to your account
+        </h1>
+        <p className="mt-2">
+          Don't have an account?
+          <Link
+            className="font-medium text-primary hover:underline hover:text-blue-500 ml-2"
+            to="/auth/signup"
+          >
+            Signup
+          </Link>
+        </p>
+      </div>
+      <Form
+        formControls={loginFormControls}
+        buttonText={'Signin'}
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={loginHandler}
+      />
+    </div>
+  );
+};
+
+export default Signin;
