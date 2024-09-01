@@ -16,6 +16,7 @@ import {
   Signup,
   UnAuthPage,
 } from './Index';
+import { Button } from './components/ui/button';
 
 const App = () => {
   const isAuthenticated = false;
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <h1>Header Components</h1>
+      
       <Routes>
         <Route
           path="/auth"
