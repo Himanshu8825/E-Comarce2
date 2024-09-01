@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./utils/DB');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const authRouter = require('./routes/authRoute');
 
 const app = express();
 
@@ -33,6 +34,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+//!Route
+app.use('/auth' , authRouter);
+
 
 //!DB Connection
 connectDB();
