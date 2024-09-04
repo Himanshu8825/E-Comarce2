@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import {
   AdminDashboard,
@@ -16,11 +17,12 @@ import {
   Signup,
   UnAuthPage,
 } from './Index';
-import { Button } from './components/ui/button';
 
 const App = () => {
-  const isAuthenticated = false;
-  const user = null;
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+
+  // console.log("isAuthenticated", isAuthenticated);
+  // console.log("user", user);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">

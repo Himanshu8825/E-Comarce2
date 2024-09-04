@@ -1,7 +1,10 @@
 import Form from '@/components/common/Form';
+import { useToast } from '@/components/ui/use-toast';
 import { loginFormControls } from '@/config/Index';
+import { signinUser } from '@/store/Slices/authSlice';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -9,10 +12,31 @@ const Signin = () => {
     password: '',
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {toast} = useToast();
+
   const loginHandler = async (event) => {
     event.preventDefault();
 
-    console.log('Form submitted:', formData);
+    dispatch(signinUser(formData)).then((data)=>{
+
+
+      if(data?.payload?.success){
+        toast({
+          title: data?.payload?.message,
+        });
+        // navigate('/dashboard');
+      }else{
+        toast({
+          title: data?.payload,
+          variant: 'destructive',
+        });
+
+      }
+    })
+
+
   };
 
   return (

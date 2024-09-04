@@ -16,10 +16,8 @@ app.get('/', (req, res) => {
 //!middilewares
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
-
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    credentials: true,
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: [
       'Content-Type',
       'Authorization',
@@ -36,8 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //!Route
-app.use('/auth' , authRouter);
-
+app.use('/auth', authRouter);
 
 //!DB Connection
 connectDB();

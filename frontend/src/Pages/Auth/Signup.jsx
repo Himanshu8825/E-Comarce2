@@ -1,19 +1,37 @@
 import Form from '@/components/common/Form';
+import { useToast } from '@/components/ui/use-toast';
 import { registerFormControls } from '@/config/Index';
+import { signupUser } from '@/store/Slices/authSlice';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    userName: '',
+    username: '',
     email: '',
     password: '',
   });
+  const { toast } = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const signupHandler = async (event) => {
     event.preventDefault();
 
-    console.log('Form submitted:', formData);
+    dispatch(signupUser(formData)).then((data) => {
+      if (data?.payload?.success) {
+        toast({
+          title: data?.payload?.message,
+        });
+        navigate('/auth/signin');
+      } else {
+        toast({
+          title: data?.payload,
+          variant: 'destructive',
+        });
+      }
+    });
   };
 
   return (
