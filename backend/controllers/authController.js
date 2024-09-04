@@ -77,7 +77,7 @@ const loginUser = async (req, res) => {
       .cookie('token', token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
         httpsOnly: true,
-        secure: false
+        secure: false,
       })
       .json({
         message: `Welcome back ${user.username}`,
@@ -98,4 +98,18 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser };
+const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie('token');
+    return res
+      .status(200)
+      .json({ message: 'Logged out successfully', success: true });
+  } catch (error) {
+    console.log(error);
+    return res
+     .status(500)
+     .json({ message: 'Internal server error', success: false });
+  }
+};
+
+module.exports = { signupUser, loginUser , logoutUser };

@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import {
   AdminDashboard,
@@ -17,12 +17,21 @@ import {
   Signup,
   UnAuthPage,
 } from './Index';
+import { useEffect } from 'react';
+import { checkAuth } from './store/Slices/authSlice';
 
 const App = () => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user , isLoading } = useSelector((state) => state.auth);
 
-  // console.log("isAuthenticated", isAuthenticated);
-  // console.log("user", user);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(checkAuth())
+  } , [dispatch])
+
+  if(isLoading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
