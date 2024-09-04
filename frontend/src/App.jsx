@@ -57,8 +57,8 @@ const App = () => {
           }
         >
           <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="order" element={<AdminOrder />} />
-          <Route path="product" element={<AdminProduct />} />
+          <Route path="orders" element={<AdminOrder />} />
+          <Route path="products" element={<AdminProduct />} />
         </Route>
 
         <Route
