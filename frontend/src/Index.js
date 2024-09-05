@@ -16,6 +16,7 @@ import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
 import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
+import ImageUpload from './Pages/Admin/ImageUpload';
 
 export {
   AdminDashboard,
@@ -35,5 +36,6 @@ export {
   ShoppingListing,
   Signin,
   Signup,
-  UnAuthPage
+  UnAuthPage,
+  ImageUpload,
 };

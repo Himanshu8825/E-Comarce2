@@ -11,7 +11,7 @@ const AdminHeader = ({setOpen}) => {
 
       <div className=" flex flex-1 justify-end ">
         <Button
-          className="hover:bg-[#7d0dc3c3] hover:text-white transition duration-500 ease-in-out"
+          className="bg-red-600 hover:bg-red-700 hover:text-white text-white transition duration-500 ease-in-out"
           variant="outline"
         >
           <LogOut className="mr-1 h-4 w-4" />
