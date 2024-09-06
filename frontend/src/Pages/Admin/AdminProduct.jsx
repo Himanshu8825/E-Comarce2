@@ -25,6 +25,7 @@ const AdminProduct = () => {
   });
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [imageLoader, setImageLoader] = useState(false);
 
   const submitHandler = async () => {
     e.preventDefault();
@@ -58,6 +59,8 @@ const AdminProduct = () => {
               setImageFile={setImageFile}
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
+              imageLoader={imageLoader}
+              setImageLoader={setImageLoader}
             />
 
             <div className="py-6">
