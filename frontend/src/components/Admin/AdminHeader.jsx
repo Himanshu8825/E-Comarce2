@@ -1,16 +1,36 @@
+import { logoutUser } from '@/store/Slices/authSlice';
 import { AlignJustify, LogOut } from 'lucide-react';
+import { useDispatch } from 'react-redux';
 import { Button } from '../ui/button';
+import { useToast } from '../ui/use-toast';
 
-const AdminHeader = ({setOpen}) => {
+const AdminHeader = ({ setOpen }) => {
+  const dispatch = useDispatch();
+  const { toast } = useToast();
+
+  const logoutHandler = async () => {
+    dispatch(logoutUser()).then((data) => {
+      if (data?.payload?.success) {
+        toast({
+          title: data?.payload?.message,
+        });
+      }
+    });
+  };
+
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-background border-b">
-      <Button onClick={()=>setOpen(true)} className=" lg:hidden sm:block bg-[#7D0DC3] hover:bg-[#6805a5]">
+      <Button
+        onClick={() => setOpen(true)}
+        className=" lg:hidden sm:block bg-[#7D0DC3] hover:bg-[#6805a5]"
+      >
         <AlignJustify />
         <span className=" sr-only">Toggle Menu</span>
       </Button>
 
       <div className=" flex flex-1 justify-end ">
         <Button
+          onClick={logoutHandler}
           className="bg-red-600 hover:bg-red-700 hover:text-white text-white transition duration-500 ease-in-out"
           variant="outline"
         >
