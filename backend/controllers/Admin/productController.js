@@ -163,8 +163,9 @@ const editProduct = async (req, res) => {
 //! Delete Product
 const deleteProduct = async (req, res) => {
   try {
-    const { productID } = req.params;
-    const product = await Product.findByIdAndDelete(productID);
+    const { id } = req.params;
+
+    const product = await Product.findByIdAndDelete(id);
     if (!product) {
       return res
         .status(404)

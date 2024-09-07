@@ -16,6 +16,7 @@ const Form = ({
   setFormData,
   onSubmit,
   buttonText,
+  isBtnDisabled,
 }) => {
   const renderInputsByComponentType = (getControlItem) => {
     let element = null;
@@ -116,7 +117,11 @@ const Form = ({
           </div>
         ))}
       </div>
-      <Button  type="submit" className="mt-4 w-full bg-[#7D0DC3] hover:bg-[#5a058e]">
+      <Button
+        disabled={isBtnDisabled}
+        type="submit"
+        className="mt-4 w-full bg-[#7D0DC3] hover:bg-[#5a058e]"
+      >
         {buttonText || 'Submit'}
       </Button>
     </form>

@@ -12,6 +12,7 @@ import { addProductFormElements } from '@/config/Index';
 import { AdminProductTile, ImageUpload } from '@/Index';
 import {
   addNewProduct,
+  deleteProduct,
   editProduct,
   fetchAllProducts,
 } from '@/store/Slices/Admin/ProductSlice';
@@ -86,6 +87,13 @@ const AdminProduct = () => {
     }
   };
 
+  const isFormValid = () => {
+    return Object.keys(formData)
+      .filter((currentKey) => currentKey !== 'averageReview')
+      .map((key) => formData[key] !== '')
+      .every((item) => item);
+  };
+
   // Fetch all products when the component is mounted
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -95,6 +103,18 @@ const AdminProduct = () => {
     setFormData(initialFormData);
     setCurrentEditedId(null);
     setCreateProduct(true);
+  };
+
+  const deleteHandler = async (id) => {
+    dispatch(deleteProduct(id)).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchAllProducts());
+        toast({
+          title: data?.payload?.message,
+          variant:'destructive'
+        });
+      }
+    });
   };
 
   return (
@@ -118,6 +138,7 @@ const AdminProduct = () => {
                 setFormData={setFormData}
                 setCurrentEditedId={setCurrentEditedId}
                 product={product}
+                deleteHandler={deleteHandler}
               />
             ))
           : null}
@@ -156,6 +177,7 @@ const AdminProduct = () => {
               setFormData={setFormData}
               buttonText={currentEditedId !== null ? 'Update' : 'Create'}
               onSubmit={submitHandler}
+              isBtnDisabled={!isFormValid()}
             />
           </div>
         </SheetContent>
