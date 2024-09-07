@@ -77,11 +77,11 @@ const addProducts = async (req, res) => {
 const fetchAllProducts = async (req, res) => {
   try {
     const products = await Product.find({});
-    if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: 'No products found', success: false });
-    }
+    // if (products.length === 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: 'No products found', success: false });
+    // }
 
     return res.status(200).json({
       message: 'Products fetched successfully',
@@ -99,7 +99,7 @@ const fetchAllProducts = async (req, res) => {
 //! Edit Product
 const editProduct = async (req, res) => {
   try {
-    const { productID } = req.params;
+    const { id } = req.params;
     const {
       image,
       title,
@@ -111,22 +111,39 @@ const editProduct = async (req, res) => {
       totalStock,
     } = req.body;
 
-    const findProduct = await Product.findById(productID);
+    // Check if all required fields are present
+    if (
+      !title ||
+      !description ||
+      !category ||
+      !price ||
+      !brand ||
+      salePrice === undefined ||
+      !totalStock ||
+      !image
+    ) {
+      return res.status(400).json({
+        message: 'All fields are required',
+        success: false,
+      });
+    }
+
+    const findProduct = await Product.findById(id);
+
     if (!findProduct) {
       return res
         .status(404)
         .json({ message: 'Product not found', success: false });
     }
 
-    findProduct.title = title || findProduct.title;
-    findProduct.description = description || findProduct.description;
-    findProduct.category = category || findProduct.category;
-    findProduct.brand = brand || findProduct.brand;
-    findProduct.price = price !== undefined ? price : findProduct.price;
-    findProduct.salePrice =
-      salePrice !== undefined ? salePrice : findProduct.salePrice;
-    findProduct.totalStock = totalStock || findProduct.totalStock;
-    findProduct.image = image || findProduct.image;
+    findProduct.title = title;
+    findProduct.description = description;
+    findProduct.category = category;
+    findProduct.brand = brand;
+    findProduct.price = price;
+    findProduct.salePrice = salePrice;
+    findProduct.totalStock = totalStock;
+    findProduct.image = image;
 
     await findProduct.save();
 

@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import { FileIcon, UploadCloudIcon, XIcon } from 'lucide-react';
@@ -13,6 +14,7 @@ const ImageUpload = ({
   setImageUrl,
   setImageLoader,
   imageLoader,
+  isEditMode,
 }) => {
   const inputRef = useRef(null);
   const { toast } = useToast();
@@ -42,7 +44,7 @@ const ImageUpload = ({
       inputRef.current.value = '';
       toast({
         title: 'Image Removed ',
-        variant: 'outline',
+        variant: 'destructive',
       });
     }
   };
@@ -56,7 +58,7 @@ const ImageUpload = ({
       data.append('my_file', imageFile);
 
       const res = await axios.post(webUrl, data);
-      console.log('Response:', res);
+      // console.log('Response:', res);
 
       if (res.data.success) {
         setImageUrl(res?.data?.result?.url);
@@ -80,6 +82,8 @@ const ImageUpload = ({
     }
   }, [imageFile]);
 
+
+
   return (
     <div className="w-full max-w-md mx-auto">
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
@@ -87,7 +91,7 @@ const ImageUpload = ({
       <div
         onDragOver={dragOverHandler}
         onDrop={dropHandler}
-        className="border-2 border-dashed rounded-lg p-4 mt-4"
+        className={`${isEditMode ? ' opacity-40' : ''} border-2 border-dashed rounded-lg p-4 mt-4`}
       >
         <Input
           className="hidden"
@@ -95,16 +99,21 @@ const ImageUpload = ({
           type="file"
           ref={inputRef}
           onChange={changeHandler}
+          disabled={isEditMode}
         />
 
         {!imageFile ? (
           <Label
             htmlFor="image-upload"
-            className="flex flex-col items-center justify-center h-32 cursor-pointer"
+            className={` ${
+              isEditMode ? ' cursor-not-allowed' : ''
+            } flex flex-col items-center justify-center h-32 cursor-pointer`}
           >
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
             <span>Drag and drop or click to upload image</span>
           </Label>
+        ) : imageLoader ? (
+          <Skeleton className="h-10 bg-gray-200" />
         ) : (
           <div className="flex items-center justify-between">
             <div className="flex items-center">
