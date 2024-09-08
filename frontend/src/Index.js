@@ -18,6 +18,7 @@ import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
 import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
+import ProductFilter from './components/Shopping/ProductFilter';
 
 export {
   AdminDashboard,
@@ -40,4 +41,5 @@ export {
   Signin,
   Signup,
   UnAuthPage,
+  ProductFilter,
 };
