@@ -4,6 +4,7 @@ import AdminProductTile from './components/Admin/AdminProductTile';
 import AdminSidebar from './components/Admin/AdminSidebar';
 import AuthLayout from './components/auth/AuthLayout';
 import CheckAuth from './components/common/CheckAuth';
+import ProductFilter from './components/Shopping/ProductFilter';
 import ShoppingHeader from './components/Shopping/ShoppingHeader';
 import ShoppingLayout from './components/Shopping/ShoppingLayout';
 import AdminDashboard from './Pages/Admin/AdminDashboard';
@@ -17,8 +18,8 @@ import ShoppingAccount from './Pages/Shopping/ShoppingAccount';
 import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
 import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
+import ShopProductTile from './Pages/Shopping/ShopProductTile';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
-import ProductFilter from './components/Shopping/ProductFilter';
 
 export {
   AdminDashboard,
@@ -32,6 +33,8 @@ export {
   CheckAuth,
   ImageUpload,
   NotFound,
+  ProductFilter,
+  ShopProductTile,
   ShoppingAccount,
   ShoppingCheckOut,
   ShoppingHeader,
@@ -41,5 +44,4 @@ export {
   Signin,
   Signup,
   UnAuthPage,
-  ProductFilter,
 };
