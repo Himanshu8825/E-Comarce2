@@ -6,6 +6,7 @@ const cors = require('cors');
 const authRouter = require('./routes/authRoute');
 const productRouter = require('./routes/Admin/productRoute');
 const shopRouter = require('./routes/Shopping/ShopProductRoute');
+const cartRouter = require('./routes/Shopping/CartRoute');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use('/auth', authRouter);
 app.use('/admin/products', productRouter);
 app.use('/shop/products', shopRouter);
+app.use('/shop/cart', cartRouter);
 
 //!DB Connection
 connectDB();
