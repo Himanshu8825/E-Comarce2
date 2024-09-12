@@ -1,14 +1,46 @@
+import { addToCart, fetchCartItems } from '@/store/Slices/Shopping/CartSlice';
+import { setProductDetails } from '@/store/Slices/Shopping/ShoppingProductSlice';
 import { StarIcon } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent } from '../ui/dialog';
 import { Input } from '../ui/input';
 import { Separator } from '../ui/separator';
+import { useToast } from '../ui/use-toast';
 
 const ProductDetails = ({ open, setOpen, productDetails }) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { toast } = useToast();
+
   function handleDialogClose() {
     setOpen(false);
+    dispatch(setProductDetails());
   }
+
+  const handleAddToCart = (getCurrentProductId) => {
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+    ).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: 'destructive',
+        });
+      }
+    });
+  };
+
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid  grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
@@ -57,7 +89,12 @@ const ProductDetails = ({ open, setOpen, productDetails }) => {
           </div>
 
           <div className="mt-5 mb-2">
-            <Button className=" w-full bg-green-500 hover:bg-green-600">Add to Cart</Button>
+            <Button
+              onClick={() => handleAddToCart(productDetails?._id)}
+              className=" w-full bg-green-500 hover:bg-green-600"
+            >
+              Add to Cart
+            </Button>
           </div>
           <Separator />
 
@@ -89,7 +126,9 @@ const ProductDetails = ({ open, setOpen, productDetails }) => {
 
             <div className="flex mt-6 gap-2 mb-2 px-2 ">
               <Input placeholder="Add a review....." />
-              <Button className="bg-green-500 hover:bg-green-600">Submit</Button>
+              <Button className="bg-green-500 hover:bg-green-600">
+                Submit
+              </Button>
             </div>
           </div>
         </div>

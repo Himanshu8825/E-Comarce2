@@ -193,7 +193,7 @@ const deleteCartItems = async (req, res) => {
     await cart.save();
 
     return res.status(200).json({
-      message: 'Cart deleted successfully',
+      message: 'Product deleted successfully',
       success: true,
       data: {
         ...cart._doc,

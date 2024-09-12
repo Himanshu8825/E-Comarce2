@@ -4,6 +4,8 @@ import AdminProductTile from './components/Admin/AdminProductTile';
 import AdminSidebar from './components/Admin/AdminSidebar';
 import AuthLayout from './components/auth/AuthLayout';
 import CheckAuth from './components/common/CheckAuth';
+import CartItemContent from './components/Shopping/CartItemContent';
+import CartWrapper from './components/Shopping/CartWrapper';
 import ProductDetails from './components/Shopping/ProductDetails';
 import ProductFilter from './components/Shopping/ProductFilter';
 import ShoppingHeader from './components/Shopping/ShoppingHeader';
@@ -31,6 +33,8 @@ export {
   AdminProductTile,
   AdminSidebar,
   AuthLayout,
+  CartItemContent,
+  CartWrapper,
   CheckAuth,
   ImageUpload,
   NotFound,
