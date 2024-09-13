@@ -7,6 +7,7 @@ const authRouter = require('./routes/authRoute');
 const productRouter = require('./routes/Admin/productRoute');
 const shopRouter = require('./routes/Shopping/ShopProductRoute');
 const cartRouter = require('./routes/Shopping/CartRoute');
+const addressRouter = require('./routes/Shopping/AddressRoute');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/auth', authRouter);
 app.use('/admin/products', productRouter);
 app.use('/shop/products', shopRouter);
 app.use('/shop/cart', cartRouter);
+app.use('/shop/address', addressRouter);
 
 //!DB Connection
 connectDB();
