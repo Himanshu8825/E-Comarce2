@@ -57,7 +57,7 @@ const ShopProductTile = ({
       <CardFooter>
         <Button
           onClick={() => handleAddToCart(product?._id)}
-          className=" w-full "
+          className=" w-full bg-teal-500 hover:bg-cyan-600 transition-all ease-in-out duration-700 "
         >
           Add to cart
         </Button>

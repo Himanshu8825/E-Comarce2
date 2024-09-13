@@ -7,7 +7,12 @@ import { House, LogOutIcon, Menu, ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { Button } from '../ui/button';
 import {
@@ -17,21 +22,44 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import { Label } from '../ui/label';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { useToast } from '../ui/use-toast';
 
 const MenuItems = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleNavigate = (getCurrentMenuItem) => {
+    sessionStorage.removeItem('filters');
+    const currentFilter =
+      getCurrentMenuItem.id !== 'home' &&
+      getCurrentMenuItem.id !== 'products' &&
+      getCurrentMenuItem.id !== 'search'
+        ? {
+            category: [getCurrentMenuItem.id],
+          }
+        : null;
+
+    sessionStorage.setItem('filters', JSON.stringify(currentFilter));
+
+    location.pathname.includes('listing') && currentFilter !== null
+      ? setSearchParams(
+          new URLSearchParams(`?category=${getCurrentMenuItem.id}`)
+        )
+      : navigate(getCurrentMenuItem.path);
+  };
   return (
     <nav className=" poppins-medium flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((item, index) => (
-        <Link
+        <Label
           key={item.id}
-          to={item.path}
           className=" text-sm font-medium hover:text-blue-700"
+          onClick={() => handleNavigate(item)}
         >
-          {' '}
           {item.label}
-        </Link>
+        </Label>
       ))}
     </nav>
   );
