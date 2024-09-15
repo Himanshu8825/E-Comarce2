@@ -34,11 +34,11 @@ export const fetchAllAddresses = createAsyncThunk(
 
 export const editAddress = createAsyncThunk(
   '/addresses/editAddress',
-  async ({ userId, addressId, formdata }, { rejectWithValue }) => {
+  async ({ userId, addressId, formData }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
         `${backendURL}/update/${userId}/${addressId}`,
-        formdata
+        formData
       );
       return response.data;
     } catch (error) {
@@ -61,7 +61,7 @@ export const deleteAddress = createAsyncThunk(
   }
 );
 
-const AddressSlice = createSlice({
+const addressSlice = createSlice({
   name: 'address',
   initialState,
   reducers: {},
@@ -70,7 +70,7 @@ const AddressSlice = createSlice({
       .addCase(addNewAddress.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addNewAddress.fulfilled, (state, action) => {
+      .addCase(addNewAddress.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addCase(addNewAddress.rejected, (state) => {
@@ -86,8 +86,27 @@ const AddressSlice = createSlice({
       .addCase(fetchAllAddresses.rejected, (state) => {
         state.isLoading = false;
         state.addressList = [];
+      })
+      .addCase(editAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editAddress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const updatedAddress = action.payload.data;
+
+        // Find the index of the updated address in the addressList
+        const index = state.addressList.findIndex(
+          (address) => address._id === updatedAddress._id
+        );
+
+        if (index !== -1) {
+          state.addressList[index] = updatedAddress; // Update the address
+        }
+      })
+      .addCase(editAddress.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
 
-export default AddressSlice.reducer;
+export default addressSlice.reducer;

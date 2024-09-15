@@ -1,8 +1,12 @@
 import { CartItemContent } from '@/Index';
 import { Button } from '../ui/button';
 import { SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
+import { useNavigate } from 'react-router-dom';
 
 const CartWrapper = ({ cartItems }) => {
+
+  const navigate = useNavigate();
+
   const totalCartAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce(
@@ -33,7 +37,7 @@ const CartWrapper = ({ cartItems }) => {
           <span className=" font-bold">&#8377;{totalCartAmount}</span>
         </div>
       </div>
-      <Button className=" bg-green-500 hover:bg-green-600 mt-6 w-full">
+      <Button onClick={()=>navigate('/shop/checkout')} className=" bg-green-500 hover:bg-green-600 mt-6 w-full">
         Checkout
       </Button>
     </SheetContent>

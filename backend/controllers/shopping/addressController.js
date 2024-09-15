@@ -44,24 +44,24 @@ const fetchAddress = async (req, res) => {
         .json({ message: 'User ID is required', success: false });
     }
 
-    const address = await Address.findOne({ userId });
+    const addresses = await Address.find({ userId }); // Changed from findOne to find
 
-    if (!address) {
+    if (addresses.length === 0) {
       return res
         .status(404)
-        .json({ message: 'Address not found', success: false });
+        .json({ message: 'No addresses found', success: false });
     }
 
     return res.status(200).json({
-      message: 'Address fetched successfully',
+      message: 'Addresses fetched successfully',
       success: true,
-      data: address,
+      data: addresses, // Send the array of addresses
     });
   } catch (error) {
     console.log(error);
     return res
       .status(500)
-      .json({ message: 'Error while fetching address', success: false });
+      .json({ message: 'Error while fetching addresses', success: false });
   }
 };
 
@@ -111,7 +111,7 @@ const deleteAddress = async (req, res) => {
         .json({ message: 'UserId and addressId are required', success: false });
     }
 
-    const address = await Address.findOneAndDelete({ userId, _id: addressId });
+    const address = await Address.findOneAndDelete({ _id: addressId, userId });
 
     if (!address) {
       return res

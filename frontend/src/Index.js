@@ -17,6 +17,9 @@ import ImageUpload from './Pages/Admin/ImageUpload';
 import Signin from './Pages/Auth/Signin';
 import Signup from './Pages/Auth/Signup';
 import NotFound from './Pages/NotFound';
+import Address from './Pages/Shopping/Address';
+import AddressCard from './Pages/Shopping/AddressCard';
+import Orders from './Pages/Shopping/Orders';
 import ShoppingAccount from './Pages/Shopping/ShoppingAccount';
 import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
 import ShoppingHome from './Pages/Shopping/ShoppingHome';
@@ -25,6 +28,8 @@ import ShopProductTile from './Pages/Shopping/ShopProductTile';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
 
 export {
+  Address,
+  AddressCard,
   AdminDashboard,
   AdminHeader,
   AdminLayout,
@@ -38,6 +43,7 @@ export {
   CheckAuth,
   ImageUpload,
   NotFound,
+  Orders,
   ProductDetails,
   ProductFilter,
   ShopProductTile,

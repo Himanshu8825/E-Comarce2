@@ -123,8 +123,8 @@ const HeaderRightContent = () => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onClick={() => navigate('/shop/account')}>
-            <FaRegUserCircle className="w-4 h-4 mr-2" />
+          <DropdownMenuItem onClick={() => navigate('/shop/account')} className="cursor-pointer" >
+            <FaRegUserCircle className="w-4 h-4 mr-2 " />
             Account
           </DropdownMenuItem>
           <DropdownMenuSeparator />
