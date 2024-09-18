@@ -1,5 +1,6 @@
 import AdminHeader from './components/Admin/AdminHeader';
 import AdminLayout from './components/Admin/AdminLayout';
+import AdminOrderDetails from './components/Admin/AdminOrderDetails';
 import AdminProductTile from './components/Admin/AdminProductTile';
 import AdminSidebar from './components/Admin/AdminSidebar';
 import AuthLayout from './components/auth/AuthLayout';
@@ -10,6 +11,7 @@ import ProductDetails from './components/Shopping/ProductDetails';
 import ProductFilter from './components/Shopping/ProductFilter';
 import ShoppingHeader from './components/Shopping/ShoppingHeader';
 import ShoppingLayout from './components/Shopping/ShoppingLayout';
+import ShoppingOrderDetails from './components/Shopping/ShoppingOrderDetails';
 import AdminDashboard from './Pages/Admin/AdminDashboard';
 import AdminOrder from './Pages/Admin/AdminOrder';
 import AdminProduct from './Pages/Admin/AdminProduct';
@@ -34,6 +36,7 @@ export {
   AdminHeader,
   AdminLayout,
   AdminOrder,
+  AdminOrderDetails,
   AdminProduct,
   AdminProductTile,
   AdminSidebar,
@@ -53,6 +56,7 @@ export {
   ShoppingHome,
   ShoppingLayout,
   ShoppingListing,
+  ShoppingOrderDetails,
   Signin,
   Signup,
   UnAuthPage,

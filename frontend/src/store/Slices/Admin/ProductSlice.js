@@ -36,6 +36,8 @@ export const fetchAllProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await axios.get(`${backendURL}/getAll-products`);
+      
+
       return result?.data;
     } catch (error) {
       return rejectWithValue(
@@ -93,11 +95,13 @@ const AdminProductSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.isLoading = false;
+
+
         state.productList = action.payload.data;
       })
       .addCase(fetchAllProducts.rejected, (state) => {
         state.isLoading = false;
-        state.productList = []; // Error handled in thunk, no need for rejected handler logic here
+        state.productList = [];
       });
   },
 });

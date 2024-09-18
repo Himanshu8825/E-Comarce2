@@ -39,6 +39,8 @@ const AdminProduct = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [imageLoader, setImageLoader] = useState(false);
   const { productList } = useSelector((state) => state.adminProducts);
+ 
+
   const dispatch = useDispatch();
 
   // Handles the form submission for adding or editing a product
@@ -111,7 +113,7 @@ const AdminProduct = () => {
         dispatch(fetchAllProducts());
         toast({
           title: data?.payload?.message,
-          variant:'destructive'
+          variant: 'destructive',
         });
       }
     });

@@ -99,6 +99,7 @@ const HeaderRightContent = () => {
           <span className=" sr-only">User Cart</span>
         </Button>
         <CartWrapper
+        setOpenCartSheet={setOpenCartSheet}
           cartItems={
             cartItems && cartItems.items && cartItems.items.length > 0
               ? cartItems.items
@@ -123,7 +124,10 @@ const HeaderRightContent = () => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onClick={() => navigate('/shop/account')} className="cursor-pointer" >
+          <DropdownMenuItem
+            onClick={() => navigate('/shop/account')}
+            className="cursor-pointer"
+          >
             <FaRegUserCircle className="w-4 h-4 mr-2 " />
             Account
           </DropdownMenuItem>

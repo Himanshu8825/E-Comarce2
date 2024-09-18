@@ -74,9 +74,26 @@ const addProducts = async (req, res) => {
 
 //! Fetch all Products
 const fetchAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    if (products.length === 0) {
+      return res
+        .status(404)
+        .json({ message: 'No products found', success: false });
+    }
+
+    return res.status(200).json({
+      message: 'Products fetched successfully',
+      success: true,
+      data: products,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Error while fetching', success: false });
+  }
 };
-
-
 
 //! Edit Product
 const editProduct = async (req, res) => {
