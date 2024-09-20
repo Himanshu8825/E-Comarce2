@@ -25,6 +25,8 @@ const Orders = () => {
   const { user } = useSelector((state) => state.auth);
   const { orderList, orderDetails } = useSelector((state) => state.shopOrder);
 
+  console.log('orderList: ', orderList);
+
   const handlefetchOrderDetails = (getId) => {
     dispatch(getOrderDetails(getId));
   };
@@ -71,12 +73,20 @@ const Orders = () => {
                     </TableCell>
                     <TableCell>
                       <Badge
-                        className={`capitalize font-semibold text-md  cursor-pointer ${
-                          item?.orderStatus === 'pending'
-                            ? 'bg-red-500 hover:bg-red-600 '
-                            : item?.orderStatus === 'confirmed'
+                        className={`py-1 px-3 capitalize cursor-pointer ${
+                          item?.orderStatus === 'confirmed'
+                            ? 'bg-purple-500 hover:bg-purple-600'
+                            : item?.orderStatus === 'rejected'
+                            ? 'bg-red-600 hover:bg-red-700'
+                            : item?.orderStatus === 'inShipping'
+                            ? 'bg-blue-500 hover:bg-blue-600'
+                            : item?.orderStatus === 'delivered'
                             ? 'bg-green-500 hover:bg-green-600'
-                            : ''
+                            : item?.orderStatus === 'pending'
+                            ? 'bg-yellow-500 hover:bg-yellow-600'
+                            : item?.orderStatus === 'inProcess'
+                            ? 'bg-orange-500 hover:bg-orange-600'
+                            : 'bg-gray-500'
                         }`}
                       >
                         {item?.orderStatus}
@@ -89,9 +99,9 @@ const Orders = () => {
                     <TableCell>
                       <Dialog
                         open={openDetailsDialog}
-                        onOpenChange={()=>{
+                        onOpenChange={() => {
                           setOpenDetailDialog(false);
-                          dispatch(resetOrderDetails())
+                          dispatch(resetOrderDetails());
                         }}
                       >
                         <Button

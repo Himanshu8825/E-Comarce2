@@ -33,6 +33,20 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
   }
 );
 
+export const updateOrderStatus = createAsyncThunk(
+  '/order/updateOrderStatus',
+  async ({ id, orderStatus }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${backendURL}/update/${id}`, {
+        orderStatus,
+      });
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 const adminOrderSlice = createSlice({
   name: 'adminOrderSlice',
   initialState,
@@ -61,11 +75,13 @@ const adminOrderSlice = createSlice({
       })
       .addCase(getOrderDetailsForAdmin.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.orderDetails = action.payload.data;
+        state.orderDetails = action.payload.data.order; // Update to handle order
+        state.userDetails = action.payload.data.user; // Add user details
       })
       .addCase(getOrderDetailsForAdmin.rejected, (state) => {
         state.isLoading = false;
         state.orderDetails = null;
+        state.userDetails = null; // Reset user details on error
       });
   },
 });

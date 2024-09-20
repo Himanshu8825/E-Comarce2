@@ -36,7 +36,7 @@ export const fetchAllProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await axios.get(`${backendURL}/getAll-products`);
-      
+
 
       return result?.data;
     } catch (error) {

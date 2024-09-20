@@ -1,25 +1,48 @@
+import {
+  getAllOrdersForAdmin,
+  getOrderDetailsForAdmin,
+  updateOrderStatus,
+} from '@/store/Slices/Admin/AdminOrderSlice';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Form from '../common/Form';
 import { Badge } from '../ui/badge';
 import { DialogContent } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
+import { useToast } from '../ui/use-toast';
 
 const AdminOrderDetails = ({ orderDetails }) => {
   const initialFormData = {
     status: '',
   };
   const [formData, setFormData] = useState(initialFormData);
-  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
-  console.log("Admin logged in: ", user);  // Admin info
-  console.log("Customer info: ", orderDetails);  // Customer info (normal user)
+  const { userDetails } = useSelector((state) => state.adminOrder);
 
+  const statusUpdateHandler = (event) => {
+    event.preventDefault();
+    const { status } = formData;
 
-
-  const statusUpdateHandler = (e) => {
-    e.preventDefault();
+    dispatch(
+      updateOrderStatus({ id: orderDetails?._id, orderStatus: status })
+    ).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(getOrderDetailsForAdmin(orderDetails?._id));
+        dispatch(getAllOrdersForAdmin());
+        setFormData(initialFormData);
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: 'destructive',
+        });
+      }
+    });
   };
 
   return (
@@ -54,14 +77,21 @@ const AdminOrderDetails = ({ orderDetails }) => {
           <div className="flex items-center justify-between ">
             <p className="font-medium">Order Status</p>
             <Label>
-              {' '}
               <Badge
-                className={`capitalize  py-1 px-3  ${
-                  orderDetails?.orderStatus === 'pending'
-                    ? 'bg-red-500 hover:bg-red-600 '
-                    : orderDetails?.orderStatus === 'confirmed'
+                className={`py-1 px-3 capitalize cursor-pointer ${
+                  orderDetails?.orderStatus === 'confirmed'
+                    ?  'bg-purple-500 hover:bg-purple-600'
+                    : orderDetails?.orderStatus === 'rejected'
+                    ? 'bg-red-600 hover:bg-red-700'
+                    : orderDetails?.orderStatus === 'inShipping'
+                    ? 'bg-blue-500 hover:bg-blue-600'
+                    : orderDetails?.orderStatus === 'delivered'
                     ? 'bg-green-500 hover:bg-green-600'
-                    : ''
+                    : orderDetails?.orderStatus === 'pending'
+                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                    : orderDetails?.orderStatus === 'inProcess'
+                    ? 'bg-orange-500 hover:bg-orange-600'
+                    : 'bg-gray-500'
                 }`}
               >
                 {orderDetails?.orderStatus}
@@ -95,7 +125,10 @@ const AdminOrderDetails = ({ orderDetails }) => {
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
             <div className="grid gap-0.5 text-muted-foreground">
-              <span className=" capitalize">{user?.username}</span>
+              <span className=" capitalize text-lg font-medium text-blue-700 cursor-pointer">
+                User :
+                <span className=" text-black"> {userDetails?.username}</span>
+              </span>
               <span>{orderDetails?.addressInfo?.address}</span>
               <span>{orderDetails?.addressInfo?.city}</span>
               <span>{orderDetails?.addressInfo?.pincode}</span>

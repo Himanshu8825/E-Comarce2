@@ -44,24 +44,25 @@ const Form = ({
       case 'select':
         element = (
           <Select
-            value={value}
-            onValueChange={(val) =>
+            onValueChange={(value) =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: val,
+                [getControlItem.name]: value,
               })
             }
+            value={value}
           >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder={getControlItem.placeholder} />
+            <SelectTrigger className="w-full ">
+              <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
-              {getControlItem.options?.length > 0 &&
-                getControlItem.options.map((item, index) => (
-                  <SelectItem key={index} value={item.id}>
-                    {item.label}
-                  </SelectItem>
-                ))}
+              {getControlItem.options && getControlItem.options.length > 0
+                ? getControlItem.options.map((optionItem) => (
+                    <SelectItem key={optionItem.id} value={optionItem.id} className="cursor-pointer" >
+                      {optionItem.label}
+                    </SelectItem>
+                  ))
+                : null}
             </SelectContent>
           </Select>
         );

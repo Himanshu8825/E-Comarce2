@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Badge } from '../ui/badge';
 import { DialogContent } from '../ui/dialog';
@@ -8,20 +7,10 @@ import { Separator } from '../ui/separator';
 const ShoppingOrderDetails = ({ orderDetails }) => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log("user", user);
-
-
-  const initialFormData = {
-    status: '',
-  };
-
-
-
-
   return (
     <DialogContent className="sm:max-w-[600px]">
       <div className="grid gap-6">
-      <div className="grid gap-2">
+        <div className="grid gap-2">
           <div className="flex items-center justify-between mt-6">
             <p className="font-medium">Order ID </p>
             <Label>{orderDetails?._id}</Label>
@@ -52,12 +41,20 @@ const ShoppingOrderDetails = ({ orderDetails }) => {
             <Label>
               {' '}
               <Badge
-                className={`capitalize  py-1 px-3  ${
-                  orderDetails?.orderStatus === 'pending'
-                    ? 'bg-red-500 hover:bg-red-600 '
-                    : orderDetails?.orderStatus === 'confirmed'
+                className={`py-1 px-3 capitalize cursor-pointer ${
+                  orderDetails?.orderStatus === 'confirmed'
+                    ? 'bg-purple-500 hover:bg-purple-600'
+                    : orderDetails?.orderStatus === 'rejected'
+                    ? 'bg-red-600 hover:bg-red-700'
+                    : orderDetails?.orderStatus === 'inShipping'
+                    ? 'bg-blue-500 hover:bg-blue-600'
+                    : orderDetails?.orderStatus === 'delivered'
                     ? 'bg-green-500 hover:bg-green-600'
-                    : ''
+                    : orderDetails?.orderStatus === 'pending'
+                    ? 'bg-yellow-500 hover:bg-yellow-600'
+                    : orderDetails?.orderStatus === 'inProcess'
+                    ? 'bg-orange-500 hover:bg-orange-600'
+                    : 'bg-gray-500'
                 }`}
               >
                 {orderDetails?.orderStatus}

@@ -39,10 +39,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//!Route
+//!Routes
+//Auth routes
 app.use('/auth', authRouter);
-app.use('/shop/products', shopRouter);
+
+//Admin routes
+app.use('/admin/products', productRouter);
 app.use('/admin/orders', adminOrderRouter);
+
+//Shopping routes
+app.use('/shop/products', shopRouter);
 app.use('/shop/cart', cartRouter);
 app.use('/shop/address', addressRouter);
 app.use('/shop/order', orderRouter);
