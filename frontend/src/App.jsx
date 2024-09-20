@@ -8,6 +8,7 @@ import {
   AuthLayout,
   CheckAuth,
   NotFound,
+  PaypalReturnPage,
   ShoppingAccount,
   ShoppingCheckOut,
   ShoppingHome,
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="listing" element={<ShoppingListing />} />
           <Route path="checkout" element={<ShoppingCheckOut />} />
           <Route path="account" element={<ShoppingAccount />} />
+          <Route path="paypal-return" element={<PaypalReturnPage />} />
         </Route>
 
         <Route path="/unauth-page" element={<UnAuthPage />} />
