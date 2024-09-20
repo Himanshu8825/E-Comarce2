@@ -22,6 +22,7 @@ import NotFound from './Pages/NotFound';
 import Address from './Pages/Shopping/Address';
 import AddressCard from './Pages/Shopping/AddressCard';
 import Orders from './Pages/Shopping/Orders';
+import PaymentSuccess from './Pages/Shopping/PaymentSuccess';
 import PaypalReturnPage from './Pages/Shopping/PaypalReturnPage';
 import ShoppingAccount from './Pages/Shopping/ShoppingAccount';
 import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
@@ -48,6 +49,7 @@ export {
   ImageUpload,
   NotFound,
   Orders,
+  PaymentSuccess,
   PaypalReturnPage,
   ProductDetails,
   ProductFilter,

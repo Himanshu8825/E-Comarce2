@@ -1,57 +1,88 @@
 import { useState } from 'react';
-import Form from '../common/Form';
+import { useSelector } from 'react-redux';
+import { Badge } from '../ui/badge';
 import { DialogContent } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
 
-const ShoppingOrderDetails = () => {
+const ShoppingOrderDetails = ({ orderDetails }) => {
+  const { user } = useSelector((state) => state.auth);
+
+  console.log("user", user);
+
+
   const initialFormData = {
     status: '',
   };
-  const [formData, setFormData] = useState(initialFormData);
 
-  const statusUpdateHandler = (e) => {
-    e.preventDefault();
-  };
+
+
+
   return (
     <DialogContent className="sm:max-w-[600px]">
       <div className="grid gap-6">
-        <div className="grid gap-2">
+      <div className="grid gap-2">
           <div className="flex items-center justify-between mt-6">
-            <p className="font-medium">Order ID</p>
-            <Label>123456</Label>
+            <p className="font-medium">Order ID </p>
+            <Label>{orderDetails?._id}</Label>
           </div>
 
           <div className="flex items-center justify-between ">
             <p className="font-medium">Order Date</p>
-            <Label>12/3/2004</Label>
-          </div>
-
-          <div className="flex items-center justify-between ">
-            <p className="font-medium">Order ID</p>
-            <Label>123456</Label>
+            <Label> {orderDetails?.orderDate.split('T')[0]}</Label>
           </div>
 
           <div className="flex items-center justify-between ">
             <p className="font-medium">Order Price</p>
-            <Label>&#8377; 2000</Label>
+            <Label>&#8377; {orderDetails?.totalAmount}</Label>
+          </div>
+
+          <div className="flex mt-2 items-center justify-between">
+            <p className="font-medium">Payment method</p>
+            <Label>{orderDetails?.paymentMethod}</Label>
+          </div>
+
+          <div className="flex mt-2 items-center justify-between">
+            <p className="font-medium">Payment Status</p>
+            <Label>{orderDetails?.paymentStatus}</Label>
           </div>
 
           <div className="flex items-center justify-between ">
             <p className="font-medium">Order Status</p>
-            <Label>Completed</Label>
+            <Label>
+              {' '}
+              <Badge
+                className={`capitalize  py-1 px-3  ${
+                  orderDetails?.orderStatus === 'pending'
+                    ? 'bg-red-500 hover:bg-red-600 '
+                    : orderDetails?.orderStatus === 'confirmed'
+                    ? 'bg-green-500 hover:bg-green-600'
+                    : ''
+                }`}
+              >
+                {orderDetails?.orderStatus}
+              </Badge>
+            </Label>
           </div>
         </div>
         <Separator />
 
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <div className="font-medium">Order</div>
+            <div className="font-medium">Order Details</div>
             <ul className="grid gap-3">
-              <li className="flex items-center justify-between">
-                <span>Product One</span>
-                <span>&#8377; 2000</span>
-              </li>
+              {orderDetails?.cartItems && orderDetails?.cartItems.length > 0
+                ? orderDetails?.cartItems.map((item) => (
+                    <li
+                      key={item._id}
+                      className="flex items-center justify-between"
+                    >
+                      <span>Title: {item?.title}</span>
+                      <span>Quantity: {item?.quantity}</span>
+                      <span>Price: &#8377; {item?.price}</span>
+                    </li>
+                  ))
+                : null}
             </ul>
           </div>
         </div>
@@ -60,17 +91,15 @@ const ShoppingOrderDetails = () => {
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
             <div className="grid gap-0.5 text-muted-foreground">
-              <span>Jhon Doe</span>
-              <span> Address </span>
-              <span>City</span>
-              <span>Pincode</span>
-              <span>Phone Number</span>
-              <span>Notes</span>
+              <span className=" capitalize">{user?.username}</span>
+              <span>{orderDetails?.addressInfo?.address}</span>
+              <span>{orderDetails?.addressInfo?.city}</span>
+              <span>{orderDetails?.addressInfo?.pincode}</span>
+              <span>{orderDetails?.addressInfo?.phone}</span>
+              <span>{orderDetails?.addressInfo?.notes}</span>
             </div>
           </div>
         </div>
-
-
       </div>
     </DialogContent>
   );

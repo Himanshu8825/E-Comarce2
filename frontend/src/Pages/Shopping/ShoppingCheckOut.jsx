@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Address, CartItemContent } from '@/Index';
 import { createNewOrder } from '@/store/Slices/Shopping/ShoppingOrderSlice';
+import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import img from '../../assets/account.jpg';
@@ -12,6 +13,8 @@ const ShoppingCheckOut = () => {
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [isPaymentStart, setIsPaymentStart] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
   const { toast } = useToast();
 
@@ -29,8 +32,26 @@ const ShoppingCheckOut = () => {
       : 0;
 
   const handleInitiatePaypalPayment = async () => {
+    if (cartItems.length === 0) {
+      toast({
+        title: 'Your cart is empty , Please add product to procced',
+        variant: 'destructive',
+      });
+    }
+
+    if (currentSelectedAddress === null) {
+      toast({
+        title: 'Please select one address to procced ',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setLoading(true);
+
     const orderData = {
       userId: user?.id,
+      cartId: cartItems?._id,
       cartItems: cartItems.items.map((singleCartItem) => ({
         productId: singleCartItem?.productId,
         title: singleCartItem?.title,
@@ -59,10 +80,8 @@ const ShoppingCheckOut = () => {
       payerId: '',
     };
 
-
     dispatch(createNewOrder(orderData)).then((data) => {
-     
-
+      setLoading(false);
       if (data?.payload?.success) {
         // dispatch(fetchAllAddresses(user?.id));
         setIsPaymentStart(true);
@@ -113,7 +132,14 @@ const ShoppingCheckOut = () => {
               onClick={handleInitiatePaypalPayment}
               className=" bg-teal-500 hover:bg-teal-600 transition-all ease-in-out duration-500 w-full"
             >
-              Checkout with paypal
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait...
+                </div>
+              ) : (
+                'Checkout with PayPal'
+              )}
             </Button>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import {
@@ -8,6 +9,7 @@ import {
   AuthLayout,
   CheckAuth,
   NotFound,
+  PaymentSuccess,
   PaypalReturnPage,
   ShoppingAccount,
   ShoppingCheckOut,
@@ -18,20 +20,21 @@ import {
   Signup,
   UnAuthPage,
 } from './Index';
-import { useEffect } from 'react';
 import { checkAuth } from './store/Slices/authSlice';
 
 const App = () => {
-  const { isAuthenticated, user , isLoading } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, isLoading } = useSelector(
+    (state) => state.auth
+  );
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(checkAuth())
-  } , [dispatch])
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-  if(isLoading){
-    return <h1>Loading...</h1>
+  if (isLoading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -75,6 +78,7 @@ const App = () => {
           <Route path="checkout" element={<ShoppingCheckOut />} />
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
+          <Route path="payment-success" element={<PaymentSuccess />} />
         </Route>
 
         <Route path="/unauth-page" element={<UnAuthPage />} />

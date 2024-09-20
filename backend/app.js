@@ -9,6 +9,7 @@ const shopRouter = require('./routes/Shopping/ShopProductRoute');
 const cartRouter = require('./routes/Shopping/CartRoute');
 const addressRouter = require('./routes/Shopping/AddressRoute');
 const orderRouter = require('./routes/Shopping/OrderRoute');
+const adminOrderRouter = require('./routes/Admin/adminOrderRoutes');
 
 const app = express();
 
@@ -40,8 +41,8 @@ app.use(cookieParser());
 
 //!Route
 app.use('/auth', authRouter);
-app.use('/admin/products', productRouter);
 app.use('/shop/products', shopRouter);
+app.use('/admin/orders', adminOrderRouter);
 app.use('/shop/cart', cartRouter);
 app.use('/shop/address', addressRouter);
 app.use('/shop/order', orderRouter);
