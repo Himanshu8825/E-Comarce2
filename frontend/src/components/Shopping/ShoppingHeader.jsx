@@ -55,7 +55,7 @@ const MenuItems = () => {
       {shoppingViewHeaderMenuItems.map((item, index) => (
         <Label
           key={item.id}
-          className=" text-sm font-medium hover:text-blue-700"
+          className=" text-sm font-medium hover:text-blue-700 cursor-pointer"
           onClick={() => handleNavigate(item)}
         >
           {item.label}
