@@ -5,6 +5,7 @@ import AdminProductTile from './components/Admin/AdminProductTile';
 import AdminSidebar from './components/Admin/AdminSidebar';
 import AuthLayout from './components/auth/AuthLayout';
 import CheckAuth from './components/common/CheckAuth';
+import Rating from './components/common/Rating';
 import CartItemContent from './components/Shopping/CartItemContent';
 import CartWrapper from './components/Shopping/CartWrapper';
 import ProductDetails from './components/Shopping/ProductDetails';
@@ -24,13 +25,13 @@ import AddressCard from './Pages/Shopping/AddressCard';
 import Orders from './Pages/Shopping/Orders';
 import PaymentSuccess from './Pages/Shopping/PaymentSuccess';
 import PaypalReturnPage from './Pages/Shopping/PaypalReturnPage';
+import SearchPage from './Pages/Shopping/SearchPage';
 import ShoppingAccount from './Pages/Shopping/ShoppingAccount';
 import ShoppingCheckOut from './Pages/Shopping/ShoppingCheckOut';
 import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
 import ShopProductTile from './Pages/Shopping/ShopProductTile';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
-import SearchPage from './Pages/Shopping/SearchPage';
 
 export {
   Address,
@@ -54,6 +55,8 @@ export {
   PaypalReturnPage,
   ProductDetails,
   ProductFilter,
+  Rating,
+  SearchPage,
   ShopProductTile,
   ShoppingAccount,
   ShoppingCheckOut,
@@ -65,5 +68,4 @@ export {
   Signin,
   Signup,
   UnAuthPage,
-  SearchPage
 };

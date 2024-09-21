@@ -11,6 +11,7 @@ const addressRouter = require('./routes/Shopping/AddressRoute');
 const orderRouter = require('./routes/Shopping/OrderRoute');
 const adminOrderRouter = require('./routes/Admin/adminOrderRoutes');
 const searchRouter = require('./routes/Shopping/searchRoute');
+const reviewRouter = require('./routes/Shopping/ReviewRoute');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/shop/cart', cartRouter);
 app.use('/shop/address', addressRouter);
 app.use('/shop/order', orderRouter);
 app.use('/shop/search', searchRouter);
+app.use('/shop/review', reviewRouter);
 
 //!DB Connection
 connectDB();
