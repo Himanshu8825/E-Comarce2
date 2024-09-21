@@ -34,7 +34,7 @@ const ShoppingCheckOut = () => {
   const handleInitiatePaypalPayment = async () => {
     if (cartItems.length === 0) {
       toast({
-        title: 'Your cart is empty , Please add product to procced',
+        title: 'Your cart is empty , Please add product to procced  ',
         variant: 'destructive',
       });
     }
@@ -118,7 +118,7 @@ const ShoppingCheckOut = () => {
         <div className="flex flex-col gap-4">
           {cartItems && cartItems.items && cartItems.items.length > 0
             ? cartItems.items.map((item) => (
-                <CartItemContent key={item.productId} cartItems={item} />
+                <CartItemContent key={item.productId} cartItem={item} />
               ))
             : null}
           <div className="mt-8 space-y-4">

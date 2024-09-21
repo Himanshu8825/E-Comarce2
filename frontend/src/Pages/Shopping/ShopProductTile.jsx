@@ -50,12 +50,12 @@ const ShopProductTile = ({
                   product?.salePrice > 0 ? ' line-through' : ''
                 } text-lg font-semibold text-primary`}
               >
-                &#8377;{product.price}
+                &#8377;{product?.price}
               </span>
 
-              {product.salePrice > 0 ? (
+              {product?.salePrice > 0 ? (
                 <span className="text-lg font-semibold text-primary">
-                  &#8377;{product.salePrice}
+                  &#8377;{product?.salePrice}
                 </span>
               ) : null}
             </div>

@@ -30,6 +30,7 @@ import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
 import ShopProductTile from './Pages/Shopping/ShopProductTile';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
+import SearchPage from './Pages/Shopping/SearchPage';
 
 export {
   Address,
@@ -64,4 +65,5 @@ export {
   Signin,
   Signup,
   UnAuthPage,
+  SearchPage
 };

@@ -10,6 +10,7 @@ const cartRouter = require('./routes/Shopping/CartRoute');
 const addressRouter = require('./routes/Shopping/AddressRoute');
 const orderRouter = require('./routes/Shopping/OrderRoute');
 const adminOrderRouter = require('./routes/Admin/adminOrderRoutes');
+const searchRouter = require('./routes/Shopping/searchRoute');
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/shop/products', shopRouter);
 app.use('/shop/cart', cartRouter);
 app.use('/shop/address', addressRouter);
 app.use('/shop/order', orderRouter);
+app.use('/shop/search', searchRouter);
 
 //!DB Connection
 connectDB();

@@ -8,6 +8,10 @@ import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
 
 const CartItemContent = ({ cartItem }) => {
+
+  console.log("cart item :" , cartItem);
+  
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shoppingCart);

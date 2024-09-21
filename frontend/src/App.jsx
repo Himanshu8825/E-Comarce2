@@ -11,6 +11,7 @@ import {
   NotFound,
   PaymentSuccess,
   PaypalReturnPage,
+  SearchPage,
   ShoppingAccount,
   ShoppingCheckOut,
   ShoppingHome,
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
           <Route path="payment-success" element={<PaymentSuccess />} />
+          <Route path="search" element={<SearchPage />} />
         </Route>
 
         <Route path="/unauth-page" element={<UnAuthPage />} />
