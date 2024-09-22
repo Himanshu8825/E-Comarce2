@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/shop/cart`;
+const backendURL = `${import.meta.env.VITE_API_URL}/shop/cart`;
 
 export const addToCart = createAsyncThunk(
   'cart/addToCart',

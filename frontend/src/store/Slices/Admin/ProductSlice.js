@@ -6,7 +6,7 @@ const initialState = {
   productList: [],
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/admin/products`;
+const backendURL = `${import.meta.env.VITE_API_URL}/admin/products`;
 
 // Create thunk for adding a new product with error handling
 export const addNewProduct = createAsyncThunk(

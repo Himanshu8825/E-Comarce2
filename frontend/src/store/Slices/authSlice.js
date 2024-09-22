@@ -7,7 +7,8 @@ const initialState = {
   user: null,
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/auth`;
+const backendURL = `${import.meta.env.VITE_API_URL}/auth`;
+// console.log('Backend URL ', backendURL);
 
 export const signupUser = createAsyncThunk('/auth/signup', async (formData) => {
   try {
@@ -24,13 +25,9 @@ export const signupUser = createAsyncThunk('/auth/signup', async (formData) => {
 
 export const signinUser = createAsyncThunk('/auth/signin', async (formData) => {
   try {
-    const res = await axios.post(
-      `${backendURL}/signin`,
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.post(`${backendURL}/signin`, formData, {
+      withCredentials: true,
+    });
     return res.data;
   } catch (error) {
     const errorMessage = error.response?.data?.message;

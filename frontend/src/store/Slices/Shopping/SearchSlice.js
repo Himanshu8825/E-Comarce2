@@ -6,7 +6,7 @@ const initialState = {
   searchResults: [],
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/shop/search`;
+const backendURL = `${import.meta.env.VITE_API_URL}/shop/search`;
 
 export const getSearchResults = createAsyncThunk(
   '/order/getSearchResults',

@@ -38,7 +38,7 @@ const AdminUpload = () => {
     });
   }
 
-  console.log("feture image: " , featureImageList);
+
 
 
   useEffect(() => {

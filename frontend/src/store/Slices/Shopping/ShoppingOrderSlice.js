@@ -9,7 +9,7 @@ const initialState = {
   orderDetails: null,
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/shop/order`;
+const backendURL = `${import.meta.env.VITE_API_URL}/shop/order`;
 
 export const createNewOrder = createAsyncThunk(
   '/order/createNewOrder',
@@ -114,7 +114,6 @@ const shoppingOrderSlice = createSlice({
       });
   },
 });
-
 
 export const { resetOrderDetails } = shoppingOrderSlice.actions;
 

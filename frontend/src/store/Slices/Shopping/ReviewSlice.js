@@ -6,13 +6,13 @@ const initialState = {
   reviews: [],
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/shop/review`;
+const backendURL = `${import.meta.env.VITE_API_URL}/shop/review`;
 
 export const addReview = createAsyncThunk(
   '/order/addReview',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${backendURL}/add`, data );
+      const response = await axios.post(`${backendURL}/add`, data);
       return response?.data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
@@ -51,6 +51,5 @@ const reviewSlice = createSlice({
       });
   },
 });
-
 
 export default reviewSlice.reducer;

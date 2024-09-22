@@ -6,7 +6,7 @@ const initialState = {
   addressList: [],
 };
 
-const backendURL = `${import.meta.VITE_API_URL}/shop/address`;
+const backendURL = `${import.meta.env.VITE_API_URL}/shop/address`;
 
 export const addNewAddress = createAsyncThunk(
   '/addresses/newAddress',
