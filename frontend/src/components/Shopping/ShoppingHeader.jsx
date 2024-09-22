@@ -1,6 +1,6 @@
 import { shoppingViewHeaderMenuItems } from '@/config/Index';
 import { CartWrapper } from '@/Index';
-import { logoutUser } from '@/store/Slices/authSlice';
+import { logoutUser, resetTokenAndCredentials } from '@/store/Slices/authSlice';
 import { fetchCartItems } from '@/store/Slices/Shopping/CartSlice';
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
 import { House, LogOutIcon, Menu, ShoppingCart } from 'lucide-react';
@@ -74,13 +74,17 @@ const HeaderRightContent = () => {
   const { toast } = useToast();
 
   const logoutHandler = async () => {
-    dispatch(logoutUser()).then((data) => {
-      if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
-      }
-    });
+    // dispatch(logoutUser()).then((data) => {
+    //   if (data?.payload?.success) {
+    //     toast({
+    //       title: data?.payload?.message,
+    //     });
+    //   }
+    // });
+
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate('/auth/signin');
   };
 
   useEffect(() => {

@@ -72,26 +72,38 @@ const loginUser = async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    return (
-      res
-        .status(200)
-        // .cookie('token', token, {
-        //   maxAge: 1 * 24 * 60 * 60 * 1000,
-        //   httpsOnly: true,
-        //   secure: true,
-        // })
-        .json({
-          message: `Welcome back ${user.username}`,
-          success: true,
-          user: {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            role: user.role,
-          },
-          token,
-        })
-    );
+    // return (
+    //   res
+    //     .status(200)
+    //     .cookie('token', token, {
+    //       maxAge: 1 * 24 * 60 * 60 * 1000,
+    //       httpsOnly: true,
+    //       secure: true,
+    //     })
+    //     .json({
+    //       message: `Welcome back ${user.username}`,
+    //       success: true,
+    //       user: {
+    //         id: user._id,
+    //         username: user.username,
+    //         email: user.email,
+    //         role: user.role,
+    //       },
+    //       token,
+    //     })
+    // );
+
+    return req.status(200).json({
+      success: true,
+      message: `Welcome back ${user.username}`,
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.log(error);
     return res
@@ -109,9 +121,9 @@ const logoutUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res
-     .status(500)
-     .json({ message: 'Internal server error', success: false });
+      .status(500)
+      .json({ message: 'Internal server error', success: false });
   }
 };
 
-module.exports = { signupUser, loginUser , logoutUser };
+module.exports = { signupUser, loginUser, logoutUser };
