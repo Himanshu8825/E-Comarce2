@@ -38,9 +38,8 @@ const signupUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("email: " + email);
-    console.log("password: " + password);
-
+    console.log('email: ' + email);
+    console.log('password: ' + password);
 
     if (!email || !password) {
       return res
@@ -96,7 +95,7 @@ const loginUser = async (req, res) => {
     //     })
     // );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: `Welcome back ${user.username}`,
       token,
