@@ -3,6 +3,8 @@ import AdminLayout from './components/Admin/AdminLayout';
 import AdminOrderDetails from './components/Admin/AdminOrderDetails';
 import AdminProductTile from './components/Admin/AdminProductTile';
 import AdminSidebar from './components/Admin/AdminSidebar';
+import AdminUpload from './components/Admin/AdminUpload';
+import SuperAdmin from './components/Admin/SuperAdmin';
 import AuthLayout from './components/auth/AuthLayout';
 import CheckAuth from './components/common/CheckAuth';
 import Rating from './components/common/Rating';
@@ -44,6 +46,7 @@ export {
   AdminProduct,
   AdminProductTile,
   AdminSidebar,
+  AdminUpload,
   AuthLayout,
   CartItemContent,
   CartWrapper,
@@ -67,5 +70,6 @@ export {
   ShoppingOrderDetails,
   Signin,
   Signup,
+  SuperAdmin,
   UnAuthPage,
 };

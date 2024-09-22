@@ -15,6 +15,7 @@ const ImageUpload = ({
   setImageLoader,
   imageLoader,
   isEditMode,
+  isCustomStyling = false,
 }) => {
   const inputRef = useRef(null);
   const { toast } = useToast();
@@ -82,16 +83,18 @@ const ImageUpload = ({
     }
   }, [imageFile]);
 
-
-
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div
+      className={`w-full  mt-4 ${isCustomStyling ? '' : 'max-w-md mx-auto'}`}
+    >
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
 
       <div
         onDragOver={dragOverHandler}
         onDrop={dropHandler}
-        className={`${isEditMode ? ' opacity-40' : ''} border-2 border-dashed rounded-lg p-4 mt-4`}
+        className={`${
+          isEditMode ? ' opacity-40' : ''
+        } border-2 border-dashed rounded-lg p-4 mt-4`}
       >
         <Input
           className="hidden"

@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { ProductDetails, ShopProductTile } from '@/Index';
+import { getFeatureImages } from '@/store/Slices/Common/CommonSlice';
 import { addToCart, fetchCartItems } from '@/store/Slices/Shopping/CartSlice';
 import {
   fetchAllFilteredProducts,
@@ -67,6 +68,7 @@ const ShoppingHome = () => {
 
   //! Get the user from the auth state
   const { user } = useSelector((state) => state.auth);
+  const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -88,14 +90,17 @@ const ShoppingHome = () => {
   }, [productDetails]);
 
   //! Automatically switch slides every 2 seconds
+  //! Automatically switch slides every 2 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    if (featureImageList.data && featureImageList.data.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % featureImageList.data.length);
+      }, 2000);
 
-    //! Clear the timer when the component unmounts
-    return () => clearInterval(timer);
-  }, []);
+      //! Clear the timer when the component unmounts
+      return () => clearInterval(timer);
+    }
+  }, [featureImageList.data]);
 
   //! Fetch product details based on the selected product ID
   const handleGetProductDetails = (getCurrentProductId) => {
@@ -137,20 +142,26 @@ const ShoppingHome = () => {
     );
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getFeatureImages());
+  }, [dispatch]);
+
   //! Render the Shopping Home page UI
   return (
     <div className=" flex flex-col min-h-screen">
       {/* Banner section */}
       <div className="relative w-full h-[600px] overflow-hidden">
-        {slides.map((slide, index) => (
-          <img
-            src={slide}
-            key={index}
-            className={` ${
-              index === currentSlide ? ' opacity-100 ' : ' opacity-0'
-            } absolute top-0 left-0 w-full object-cover transition-opacity duration-700`}
-          />
-        ))}
+        {featureImageList.data && featureImageList.data.length > 0
+          ? featureImageList.data.map((slide, index) => (
+              <img
+                src={slide?.image}
+                key={index}
+                className={` ${
+                  index === currentSlide ? ' opacity-100 ' : ' opacity-0'
+                } absolute   top-0 left-0 w-full object-cover transition-opacity duration-700`}
+              />
+            ))
+          : null}
         {/* Left slide button */}
         <Button
           variant="outline"

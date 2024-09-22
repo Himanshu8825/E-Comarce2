@@ -12,6 +12,7 @@ const orderRouter = require('./routes/Shopping/OrderRoute');
 const adminOrderRouter = require('./routes/Admin/adminOrderRoutes');
 const searchRouter = require('./routes/Shopping/searchRoute');
 const reviewRouter = require('./routes/Shopping/ReviewRoute');
+const featureRoute = require('./routes/common/featureRoutes');
 
 const app = express();
 
@@ -56,6 +57,9 @@ app.use('/shop/address', addressRouter);
 app.use('/shop/order', orderRouter);
 app.use('/shop/search', searchRouter);
 app.use('/shop/review', reviewRouter);
+
+//common routes
+app.use('/common/feature', featureRoute);
 
 //!DB Connection
 connectDB();

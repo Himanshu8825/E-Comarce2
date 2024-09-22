@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import featureImageSlice from '../store/Slices/Common/CommonSlice';
 import AdminOrderSlice from './Slices/Admin/AdminOrderSlice';
 import AdminProductSlice from './Slices/Admin/ProductSlice';
 import authSlice from './Slices/authSlice';
@@ -20,6 +21,7 @@ const store = configureStore({
     shopOrder: ShoppingOrderSlice,
     shopSearch: SearchSlice,
     productReview: ReviewSlice,
+    commonFeature: featureImageSlice,
   },
 });
 

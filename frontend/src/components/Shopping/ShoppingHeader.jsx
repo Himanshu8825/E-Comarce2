@@ -94,12 +94,16 @@ const HeaderRightContent = () => {
           onClick={() => setOpenCartSheet(true)}
           variant="outline"
           size="icon"
+          className=" relative"
         >
           <ShoppingCart className=" w-6 h-6" />
+          <spam className="absolute top-[-4px] right-[4px] font-extrabold text-md">
+            {cartItems?.items?.length || ''}
+          </spam>
           <span className=" sr-only">User Cart</span>
         </Button>
         <CartWrapper
-        setOpenCartSheet={setOpenCartSheet}
+          setOpenCartSheet={setOpenCartSheet}
           cartItems={
             cartItems && cartItems.items && cartItems.items.length > 0
               ? cartItems.items

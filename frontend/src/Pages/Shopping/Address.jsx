@@ -20,7 +20,7 @@ const initialAddressFormData = {
   notes: '',
 };
 
-const Address = ({setCurrentSelectedAddress}) => {
+const Address = ({ setCurrentSelectedAddress, selectedId }) => {
   const [formData, setFormData] = useState(initialAddressFormData);
   const [currentEditedId, setCurrentEditId] = useState(null);
   const dispatch = useDispatch();
@@ -81,8 +81,6 @@ const Address = ({setCurrentSelectedAddress}) => {
   };
 
   const handleDeleteAddress = (getCurrentAddress) => {
-
-
     dispatch(
       deleteAddress({ userId: user?.id, addressId: getCurrentAddress._id })
     ).then((data) => {
@@ -123,12 +121,12 @@ const Address = ({setCurrentSelectedAddress}) => {
         {addressList && addressList.length > 0
           ? addressList.map((address) => (
               <AddressCard
+                selectedId={selectedId}
                 key={address._id}
                 addressInfo={address}
                 handleEditAddress={handleEditAddress}
                 handleDeleteAddress={handleDeleteAddress}
                 setCurrentSelectedAddress={setCurrentSelectedAddress}
-                // setFormData={setFormData}
               />
             ))
           : null}
