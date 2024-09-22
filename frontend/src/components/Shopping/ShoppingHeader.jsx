@@ -83,6 +83,7 @@ const HeaderRightContent = () => {
     // });
 
     dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
     navigate('/auth/signin')
   };
 

@@ -20,6 +20,7 @@ const AdminHeader = ({ setOpen }) => {
     // });
 
     dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
     navigate('/auth/signin');
   };
 
