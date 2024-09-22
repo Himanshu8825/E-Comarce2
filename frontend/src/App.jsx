@@ -36,6 +36,8 @@ const App = () => {
   }, [dispatch]);
 
   if (isLoading) {
+    console.log("aaa nhi rha hai kuchh");
+    
     return <h1>Loading...</h1>;
   }
 
