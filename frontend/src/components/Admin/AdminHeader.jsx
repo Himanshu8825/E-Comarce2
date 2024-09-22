@@ -1,21 +1,33 @@
-import { logoutUser } from '@/store/Slices/authSlice';
+import { resetTokenAndCredentials } from '@/store/Slices/authSlice';
 import { AlignJustify, LogOut } from 'lucide-react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
 
 const AdminHeader = ({ setOpen }) => {
   const dispatch = useDispatch();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const logoutHandler = async () => {
-    dispatch(logoutUser()).then((data) => {
+    // dispatch(logoutUser()).then((data) => {
+    //   if (data?.payload?.success) {
+    //     toast({
+    //       title: data?.payload?.message,
+    //     });
+    //   }
+    // });
+
+    dispatch(resetTokenAndCredentials()).then((data) => {
       if (data?.payload?.success) {
         toast({
           title: data?.payload?.message,
         });
       }
     });
+    sessionStorage.clear();
+    navigate('/auth/signin');
   };
 
   return (

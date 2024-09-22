@@ -82,7 +82,13 @@ const HeaderRightContent = () => {
     //   }
     // });
 
-    dispatch(resetTokenAndCredentials());
+    dispatch(resetTokenAndCredentials()).then((data)=>{
+      if(data?.payload?.success){
+        toast({
+          title: data?.payload?.message,
+        });
+      }
+    });
     sessionStorage.clear();
     navigate('/auth/signin');
   };
