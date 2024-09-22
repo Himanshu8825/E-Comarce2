@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
 };
 
-const backendURL = 'http://localhost:3000/shop/cart';
+const backendURL = `${import.meta.VITE_API_URL}/shop/cart`;
 
 export const addToCart = createAsyncThunk(
   'cart/addToCart',

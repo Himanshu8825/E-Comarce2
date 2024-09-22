@@ -7,7 +7,7 @@ const initialState = {
   productDetails: null,
 };
 
-const backendURL = 'http://localhost:3000/shop/products';
+const backendURL = `${import.meta.VITE_API_URL}/shop/products`;
 
 // Thunk in Slice Code
 export const fetchAllFilteredProducts = createAsyncThunk(
@@ -80,6 +80,6 @@ const shoppingProductSlice = createSlice({
   },
 });
 
-export const {setProductDetails} = shoppingProductSlice.actions;
+export const { setProductDetails } = shoppingProductSlice.actions;
 
 export default shoppingProductSlice.reducer;

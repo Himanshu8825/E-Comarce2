@@ -7,15 +7,13 @@ const initialState = {
   user: null,
 };
 
+const backendURL = `${import.meta.VITE_API_URL}/auth`;
+
 export const signupUser = createAsyncThunk('/auth/signup', async (formData) => {
   try {
-    const res = await axios.post(
-      'http://localhost:3000/auth/signup',
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.post(`${backendURL}/signup`, formData, {
+      withCredentials: true,
+    });
     return res.data;
   } catch (error) {
     const errorMessage = error.response?.data?.message;
@@ -27,7 +25,7 @@ export const signupUser = createAsyncThunk('/auth/signup', async (formData) => {
 export const signinUser = createAsyncThunk('/auth/signin', async (formData) => {
   try {
     const res = await axios.post(
-      'http://localhost:3000/auth/signin',
+      `${backendURL}/signin`,
       formData,
       {
         withCredentials: true,
@@ -43,7 +41,7 @@ export const signinUser = createAsyncThunk('/auth/signin', async (formData) => {
 export const logoutUser = createAsyncThunk('/auth/logout', async () => {
   try {
     const res = await axios.post(
-      'http://localhost:3000/auth/logout',
+      `${backendURL}/logout`,
       {},
       {
         withCredentials: true,
@@ -60,7 +58,7 @@ export const checkAuth = createAsyncThunk(
   '/auth/checkauth',
 
   async () => {
-    const response = await axios.get('http://localhost:3000/auth/check-auth', {
+    const response = await axios.get(`${backendURL}/checkauth'`, {
       withCredentials: true,
       headers: {
         'Cache-Control':

@@ -9,7 +9,7 @@ const initialState = {
   orderDetails: null,
 };
 
-const backendURL = 'http://localhost:3000/shop/order';
+const backendURL = `${import.meta.VITE_API_URL}/shop/order`;
 
 export const createNewOrder = createAsyncThunk(
   '/order/createNewOrder',

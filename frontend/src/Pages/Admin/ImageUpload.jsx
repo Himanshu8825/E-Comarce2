@@ -50,7 +50,7 @@ const ImageUpload = ({
     }
   };
 
-  const webUrl = 'http://localhost:3000/admin/products/upload-image';
+  const webUrl = `${import.meta.VITE_API_URL}/admin/products/upload-image`;
 
   const uploadImageToCloudinary = async () => {
     setImageLoader(true);

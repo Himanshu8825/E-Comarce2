@@ -6,7 +6,7 @@ const initialState = {
   reviews: [],
 };
 
-const backendURL = 'http://localhost:3000/shop/review';
+const backendURL = `${import.meta.VITE_API_URL}/shop/review`;
 
 export const addReview = createAsyncThunk(
   '/order/addReview',

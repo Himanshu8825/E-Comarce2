@@ -6,7 +6,7 @@ const initialState = {
   featureImageList: [],
 };
 
-const backendURL = 'http://localhost:3000/common/feature';
+const backendURL = `${import.meta.VITE_API_URL}/common/feature`;
 
 // Create thunk for adding a new product with error handling
 export const addFeatureImage = createAsyncThunk(

@@ -26,10 +26,10 @@ const createOrder = async (req, res) => {
         payment_method: 'paypal',
       },
       redirect_urls: {
-        return_url: 'http://localhost:5173/shop/paypal-return',
-        cancel_url: 'http://localhost:5173/shop/paypal-cancel',
+        return_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-return`,
+        cancel_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-cancel`,
       },
-      transactions: [
+      transactions: [ 
         {
           item_list: {
             items: cartItems.map((item) => ({
@@ -120,17 +120,19 @@ const capturePayment = async (req, res) => {
     order.paymentId = paymentId;
     order.payerId = payerId;
 
-    for(let item of order.cartItems){
+    for (let item of order.cartItems) {
       let product = await Product.findById(item.productId);
 
-      if(!product){
-        return res.status(404).json({ message: `Not enough stock for this product ${product.title}`, success: false });
+      if (!product) {
+        return res.status(404).json({
+          message: `Not enough stock for this product ${product.title}`,
+          success: false,
+        });
       }
 
       product.totalStock -= item.quantity;
 
       await product.save();
-
     }
 
     const cartId = order.cartId;

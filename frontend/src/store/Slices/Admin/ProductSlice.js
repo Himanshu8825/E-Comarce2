@@ -6,7 +6,7 @@ const initialState = {
   productList: [],
 };
 
-const backendURL = 'http://localhost:3000/admin/products';
+const backendURL = `${import.meta.VITE_API_URL}/admin/products`;
 
 // Create thunk for adding a new product with error handling
 export const addNewProduct = createAsyncThunk(
@@ -36,7 +36,6 @@ export const fetchAllProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await axios.get(`${backendURL}/getAll-products`);
-
 
       return result?.data;
     } catch (error) {
@@ -95,7 +94,6 @@ const AdminProductSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.isLoading = false;
-
 
         state.productList = action.payload.data;
       })
