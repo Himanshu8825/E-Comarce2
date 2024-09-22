@@ -38,8 +38,8 @@ const signupUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log('email: ' + email);
-    console.log('password: ' + password);
+
+
 
     if (!email || !password) {
       return res
@@ -74,28 +74,9 @@ const loginUser = async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    // return (
-    //   res
-    //     .status(200)
-    //     .cookie('token', token, {
-    //       maxAge: 1 * 24 * 60 * 60 * 1000,
-    //       httpsOnly: true,
-    //       secure: true,
-    //     })
-    //     .json({
-    //       message: `Welcome back ${user.username}`,
-    //       success: true,
-    //       user: {
-    //         id: user._id,
-    //         username: user.username,
-    //         email: user.email,
-    //         role: user.role,
-    //       },
-    //       token,
-    //     })
-    // );
+    
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: `Welcome back ${user.username}`,
       token,
