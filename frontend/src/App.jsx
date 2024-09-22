@@ -31,18 +31,11 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = JSON.parse(sessionStorage.getItem('token'));
-    if (token) {
-      dispatch(checkAuth(token)).then((res) => {
-        if (!res.payload?.success) {
-          sessionStorage.clear(); // Clear session if token validation fails
-        }
-      });
-    }
+    dispatch(checkAuth());
   }, [dispatch]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>; // Replace with spinner if needed
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -50,7 +43,12 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<CheckAuth isAuthenticated={isAuthenticated} user={user} />}
+          element={
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+            ></CheckAuth>
+          }
         />
 
         <Route

@@ -109,9 +109,9 @@ const logoutUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res
-      .status(500)
-      .json({ message: 'Internal server error', success: false });
+     .status(500)
+     .json({ message: 'Internal server error', success: false });
   }
 };
 
-module.exports = { signupUser, loginUser, logoutUser };
+module.exports = { signupUser, loginUser , logoutUser };
