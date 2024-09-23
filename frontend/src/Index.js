@@ -34,6 +34,7 @@ import ShoppingHome from './Pages/Shopping/ShoppingHome';
 import ShoppingListing from './Pages/Shopping/ShoppingListing';
 import ShopProductTile from './Pages/Shopping/ShopProductTile';
 import UnAuthPage from './Pages/unAuthPage/UnAuthPage';
+import Footer from './Pages/Footer';
 
 export {
   Address,
@@ -72,4 +73,5 @@ export {
   Signup,
   SuperAdmin,
   UnAuthPage,
+  Footer,
 };

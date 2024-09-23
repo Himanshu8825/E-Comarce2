@@ -1,4 +1,4 @@
-import { ShoppingHeader } from '@/Index';
+import { Footer, ShoppingHeader } from '@/Index';
 import { Outlet } from 'react-router-dom';
 
 const ShoppingLayout = () => {
@@ -10,6 +10,7 @@ const ShoppingLayout = () => {
 
       <main className="flex flex-col w-full">
         <Outlet />
+        <Footer />
       </main>
     </div>
   );
